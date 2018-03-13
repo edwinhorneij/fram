@@ -4,10 +4,9 @@ ini_set('display_errors', true);
 
 define('DS', DIRECTORY_SEPARATOR);
 
+define('APP_DIR', ROOT_DIR.DS.'app');
+define('LIB_DIR', ROOT_DIR.DS.'lib');
 define('URL_ROOT', DS);
-define('DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
-//define('APP_DIR', DOC_ROOT.DS.'app');
-//define('LIB_DIR', DOC_ROOT.DS.'lib');
 
 require_once LIB_DIR . '/Fram/Loader.php';
 Fram\Loader::register();
