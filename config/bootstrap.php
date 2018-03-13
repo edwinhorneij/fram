@@ -8,6 +8,9 @@ define('APP_DIR', ROOT_DIR.DS.'app');
 define('LIB_DIR', ROOT_DIR.DS.'lib');
 define('URL_ROOT', DS);
 
+define('DEFAULT_CONTROLLER', 'home');
+define('DEFAULT_ACTION', 'index');
+
 require_once LIB_DIR . '/Fram/Loader.php';
 Fram\Loader::register();
 

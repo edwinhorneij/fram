@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class TestController
+ * Class HomeController
  */
-class TestController extends Fram\Controller
+class HomeController extends Fram\Controller
 {
     /**
      * Index

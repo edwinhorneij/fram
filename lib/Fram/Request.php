@@ -11,12 +11,12 @@ class Request
     /**
      * @var string
      */
-    private $controller = 'test';
+    private $controller = DEFAULT_CONTROLLER;
 
     /**
      * @var string
      */
-    private $action = 'index';
+    private $action = DEFAULT_ACTION;
 
     /**
      * @var array
@@ -68,11 +68,11 @@ class Request
 
         $parts = explode('/', trim($base, '/'));
 
-        if (isset($parts[0])) {
+        if (!empty($parts[0])) {
             $this->controller = $parts[0];
         }
 
-        if (isset($parts[1])) {
+        if (!empty($parts[1])) {
             $this->action = $parts[1];
         }
 
