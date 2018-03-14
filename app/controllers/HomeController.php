@@ -10,6 +10,8 @@ class HomeController extends Fram\Controller
      * /test[/index]
      */
     public function index() {
+//        $user = User::create(array('first_name' => 'Edwin', 'last_name' => 'Horneij'));
+        $this->vars['users'] = User::all();
         $this->render();
     }
 }

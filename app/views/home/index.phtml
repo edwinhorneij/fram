@@ -1,1 +1,5 @@
-<?= __FILE__ ?>
+<pre>
+    <?php foreach($this->vars['users'] as $user): ?>
+        <?= $user->first_name ?> <?= $user->last_name ?>
+    <?php endforeach; ?>
+</pre>

@@ -14,6 +14,8 @@ define('DEFAULT_ACTION', 'index');
 require_once LIB_DIR . '/Fram/Loader.php';
 Fram\Loader::register();
 
+require_once 'php-activerecord.php';
+
 // Required files
 //require_once LIB_DIR . '/Fram/Exceptions.php';
 //require_once LIB_DIR . '/Fram/Loader.php';

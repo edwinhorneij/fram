@@ -14,6 +14,11 @@ class Controller
     private $request;
 
     /**
+     * @var array
+     */
+    protected $vars = array();
+
+    /**
      * Controller constructor.
      * @param $request
      */
