@@ -122,13 +122,7 @@ class Request
     private function loadController()
     {
         $controllerClassName = implode('', array_map('ucwords', explode('_', $this->getControllerName()))).'Controller';
-
-        try {
-            $this->controller = new $controllerClassName($this);
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            die;
-        }
+        $this->controller = new $controllerClassName($this);
     }
 
     /**

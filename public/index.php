@@ -3,23 +3,18 @@
 define('ROOT_DIR', realpath(__DIR__ . '/../'));
 require_once ROOT_DIR . '/config/bootstrap.php';
 
-$request = new Fram\Request();
-$content = $request->dispatch();
+try {
+    $request = new Fram\Request();
+    $content = $request->dispatch();
+    require_once APP_DIR.'/views/layouts/application.phtml';
 
-//$controllerClassName = implode('', array_map('ucwords', explode('_', $request->getControllerName()))).'Controller';
-//$controller = new $controllerClassName($request);
-
-//ob_start();
-//$controller->{$request->getAction()}();
-//$content = ob_get_contents();
-//ob_end_clean();
-
-require_once APP_DIR.'/views/layouts/application.phtml';
-
-//try {
-//    $request = new Fram\Request();
-////    $request->addRoutes(include ROOT_DIR.'/config/routes.php');
-//    $request->dispatch();
-//} catch (Exception $e) {
+//    $request->addRoutes(include ROOT_DIR.'/config/routes.php');
+} catch (Exception $e) {
+    echo '<p>'.$e->getMessage().'</p>';
+    echo '<pre>'.print_r($e->getTrace(), 1).'</pre>';
+    die;
+//    echo $e->getFile();
+//    echo $e->getLine();
+//    echo $e->getMessage();
 //    $request->handleException($e);
-//}
+}
