@@ -4,14 +4,15 @@ define('ROOT_DIR', realpath(__DIR__ . '/../'));
 require_once ROOT_DIR . '/config/bootstrap.php';
 
 $request = new Fram\Request();
+$content = $request->dispatch();
 
-$controllerName = implode('', array_map('ucwords', explode('_', $request->getController()))).'Controller';
-$controller = new $controllerName($request);
+//$controllerClassName = implode('', array_map('ucwords', explode('_', $request->getControllerName()))).'Controller';
+//$controller = new $controllerClassName($request);
 
-ob_start();
-$controller->{$request->getAction()}();
-$content = ob_get_contents();
-ob_end_clean();
+//ob_start();
+//$controller->{$request->getAction()}();
+//$content = ob_get_contents();
+//ob_end_clean();
 
 require_once APP_DIR.'/views/layouts/application.phtml';
 

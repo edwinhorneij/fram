@@ -33,9 +33,9 @@ class Controller
     protected function render($file = null)
     {
         if ($file) {
-            require APP_DIR.'/views/'.$this->request->getController().'/'.$file.'.phtml';
+            require APP_DIR.'/views/'.$this->request->getControllerName().'/'.$file.'.phtml';
         } else {
-            require APP_DIR.'/views/'.$this->request->getController().'/'.$this->request->getAction().'.phtml';
+            require APP_DIR.'/views/'.$this->request->getControllerName().'/'.$this->request->getActionName().'.phtml';
         }
     }
 }
