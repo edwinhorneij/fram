@@ -9,6 +9,11 @@ namespace Fram;
 class Request
 {
     /**
+     * @var array
+     */
+    private $parts = array();
+
+    /**
      * @var string
      */
     private $controllerName = DEFAULT_CONTROLLER;
@@ -24,11 +29,24 @@ class Request
     private $queryParams = array();
 
     /**
-     * Request constructor.
+     * @var object
      */
-    public function __construct()
+    private $controller;
+
+//    /**
+//     * Request constructor.
+//     */
+//    public function __construct()
+//    {
+//        $this->parseRequest();
+//    }
+
+    /**
+     * @return array
+     */
+    public function getParts()
     {
-        $this->parseRequest();
+        return $this->parts;
     }
 
     /**
@@ -61,7 +79,7 @@ class Request
     public function dispatch()
     {
         $this->parseRequest();
-
+        $this->loadController();
         $response = $this->handleRequest();
 
         return $response;
@@ -83,18 +101,33 @@ class Request
             $base = $_SERVER['REQUEST_URI'];
         }
 
-        $parts = explode('/', trim($base, '/'));
+        $this->parts = explode('/', trim($base, '/'));
 
-        if (!empty($parts[0])) {
-            $this->controllerName = $parts[0];
+        if (!empty($this->parts[0])) {
+            $this->controllerName = $this->parts[0];
         }
 
-        if (!empty($parts[1])) {
-            $this->actionName = $parts[1];
+        if (!empty($this->parts[1])) {
+            $this->actionName = $this->parts[1];
         }
 
         if (!empty($query)) {
             parse_str($query, $this->queryParams);
+        }
+    }
+
+    /**
+     * Attempt to instantiate the controller identified in the request URI
+     */
+    private function loadController()
+    {
+        $controllerClassName = implode('', array_map('ucwords', explode('_', $this->getControllerName()))).'Controller';
+
+        try {
+            $this->controller = new $controllerClassName($this);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            die;
         }
     }
 
@@ -104,19 +137,14 @@ class Request
      * an appropriate Response. So actually, this method is the main entrypoint for the
      * dispatch loop which delegates requests to controllers.
      *
-     * @param string $controllerName
-     * @param string $actionName
+
      * @return mixed
-     * @throws RequestException
-     * @throws RuntimeException
+
      */
     public function handleRequest()
     {
-        $controllerClassName = implode('', array_map('ucwords', explode('_', $this->getControllerName()))).'Controller';
-        $controller = new $controllerClassName($this);
-
         ob_start();
-        $controller->{$this->getActionName()}();
+        $this->controller->{$this->getActionName()}();
         $content = ob_get_contents();
         ob_end_clean();
 

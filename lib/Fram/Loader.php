@@ -34,6 +34,8 @@ class Loader
 
         if (file_exists($filepath)) {
             require_once $filepath;
+        } else {
+            throw new \Exception('Cannot instantiate '.$classname.'. File '.$filepath.' not found.');
         }
     }
 }
