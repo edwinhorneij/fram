@@ -132,14 +132,8 @@ class Request
     }
 
     /**
-     * When a Controller has been found, the handleRequest method will be invoked,
-     * which is responsible for handling the actual request and - if applicable - returning
-     * an appropriate Response. So actually, this method is the main entrypoint for the
-     * dispatch loop which delegates requests to controllers.
-     *
-
-     * @return mixed
-
+     * Handle the actual request and return an appropriate Response
+     * @return string
      */
     public function handleRequest()
     {
@@ -150,16 +144,6 @@ class Request
 
         return $content;
 
-
-//        try {
-//            $controller = Loader::getInstance()->getController($controllerName);
-//        } catch (LoaderException $e) {
-//            throw new RequestException($e->getMessage(), Response::NOT_FOUND);
-//        }
-//
-//        if (method_exists($controller, 'setRequest')) {
-//            $controller->setRequest($this);
-//        }
 //
 //        $controllerResponse = null;
 //        if (method_exists($controller, 'init')) {
