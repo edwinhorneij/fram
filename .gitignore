@@ -6,4 +6,5 @@
 # PHPStorm
 .idea
 
+config.ini
 lib/activerecord

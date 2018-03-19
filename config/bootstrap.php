@@ -6,6 +6,8 @@ define('DS', DIRECTORY_SEPARATOR);
 
 define('APP_DIR', ROOT_DIR.DS.'app');
 define('LIB_DIR', ROOT_DIR.DS.'lib');
+
+define('DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('URL_ROOT', DS);
 
 define('DEFAULT_CONTROLLER', 'home');
